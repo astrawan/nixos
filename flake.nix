@@ -18,6 +18,10 @@
           inherit system;
           modules = [ ./nixos/pandorabox/configuration.nix ];
         };
+        pandorabox-v2 = lib.nixosSystem {
+          inherit system;
+          modules = [ ./nixos/pandorabox-v2/configuration.nix ];
+        };
       };
       homeConfigurations = {
         astra = home-manager.lib.homeManagerConfiguration {

@@ -259,7 +259,14 @@
       };
     };
   };
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      gui.theme = {
+        lightTheme = false;
+      };
+    };
+  };
   programs.neovide = {
     enable = true;
     settings = {
