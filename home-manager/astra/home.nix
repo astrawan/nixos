@@ -31,7 +31,6 @@
     keystore-explorer
     libreoffice
     popcorntime
-    vlc
     wireshark
     wl-clipboard
   ];

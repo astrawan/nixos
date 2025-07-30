@@ -35,6 +35,7 @@ in
       gnome-software
       nixos-artwork.wallpapers.simple-blue
       ptyxis
+      showtime
     ];
 
     # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
