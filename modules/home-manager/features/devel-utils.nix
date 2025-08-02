@@ -8,7 +8,13 @@ in
     home.packages = with pkgs; [
       ast-grep
       tree-sitter
-    ];
+    ]
+    ++ (
+      if config.devlive.features.desktop.gnome.enable then
+        with pkgs; [cartero]
+      else
+        []
+    );
 
     programs.fd.enable = true;
     programs.fzf.enable = true;
