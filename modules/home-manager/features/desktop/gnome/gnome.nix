@@ -70,9 +70,16 @@ in
       favorite-apps = [
         "org.gnome.Software.desktop"
         "org.gnome.Epiphany.desktop"
+        "org.gnome.Evolution.desktop"
         "org.gnome.Nautilus.desktop"
         "org.gnome.Ptyxis.desktop"
-      ];
+      ]
+      ++ (
+        if config.devlive.programs.folio.enable then
+          ["com.toolstack.Folio.desktop"]
+        else
+          []
+      );
     };
     dconf.settings."org/gnome/shell/keybindings" = {
       # Remove the default hotkeys for opening favorited applications.
