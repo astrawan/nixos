@@ -34,7 +34,7 @@ in
       adwaita-qt6
       gnome-software
       nixos-artwork.wallpapers.simple-blue
-      ptyxis
+      ghostty
       showtime
     ];
     programs.evolution.enable = true;

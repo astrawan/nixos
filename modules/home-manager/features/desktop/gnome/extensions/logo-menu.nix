@@ -16,7 +16,7 @@ in
         # Use the NixOS logo.
         menu-button-icon-image = 23;
 
-        menu-button-terminal = "ptyxis --new-window";
+        menu-button-terminal = "ghostty";
     };
   };
 }

@@ -61,7 +61,7 @@ in
     };
     dconf.settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>q";
-      command = "ptyxis --new-window";
+      command = "ghostty";
       name = "Run Terminal";
     };
 
@@ -72,7 +72,7 @@ in
         "org.gnome.Epiphany.desktop"
         "org.gnome.Evolution.desktop"
         "org.gnome.Nautilus.desktop"
-        "org.gnome.Ptyxis.desktop"
+        "com.mitchellh.ghostty.desktop"
       ]
       ++ (
         if config.devlive.programs.folio.enable then
@@ -93,13 +93,6 @@ in
       sleep-inactive-ac-timeout = 3600;
       sleep-inactive-battery-timeout = 1800;
     };
-    dconf.settings."org/gnome/Ptyxis" = {
-      default-profile-uuid = "dc1cb58d390b18d7c9334362687cc10d";
-      profile-uuids = ["dc1cb58d390b18d7c9334362687cc10d"];
-    };
-    dconf.settings."org/gnome/Ptyxis/Profiles/dc1cb58d390b18d7c9334362687cc10d" = {
-      bold-is-bright = true;
-    };
 
     gtk = {
       enable = true;
@@ -113,6 +106,14 @@ in
 
     home.sessionVariables = {
       QT_STYLE_OVERRIDE = "Adwaita-dark";
+    };
+
+    programs.ghostty.enable = true;
+    programs.ghostty.settings = {
+      font-family = "FiraCode Nerd Font Mono SemBd";
+      font-size = 12;
+      theme = "Adwaita Dark";
+      window-padding-x = 8;
     };
   };
 }
