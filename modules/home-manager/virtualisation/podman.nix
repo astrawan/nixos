@@ -6,10 +6,18 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      boxbuddy
       distrobox
       dive
       podman-compose
-    ];
+    ]
+    ++ (
+      if config.devlive.features.desktop.gnome.enable then
+        with pkgs; [
+          boxbuddy
+          pods
+        ]
+      else
+        []
+    );
   };
 }
