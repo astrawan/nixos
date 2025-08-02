@@ -7,6 +7,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       dig
+      ffmpeg
       p7zip-rar
       pciutils
       tcpdump
