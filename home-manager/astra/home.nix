@@ -28,7 +28,6 @@
   # environment.
   home.packages = with pkgs; [
     aegisub
-    keystore-explorer
     libreoffice
     popcorntime
     wireshark

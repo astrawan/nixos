@@ -41,6 +41,7 @@
     trash-dir = "/home/${config.devlive.user.name}/Documents/Synchronizable/Folio/Trash";
   };
   devlive.programs.gnupg.enable = true;
+  devlive.programs.keystore-explorer.enable = true;
   devlive.programs.lazygit.enable = true;
   devlive.programs.tmux.enable = true;
 
