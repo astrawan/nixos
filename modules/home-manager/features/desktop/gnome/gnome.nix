@@ -110,7 +110,8 @@ in
 
     programs.ghostty.enable = true;
     programs.ghostty.settings = {
-      font-family = "FiraCode Nerd Font Mono SemBd";
+      font-family = "FiraCode Nerd Font Mono";
+      font-style = "SemiBold";
       font-size = 12;
       theme = "Adwaita Dark";
       window-padding-x = 8;
