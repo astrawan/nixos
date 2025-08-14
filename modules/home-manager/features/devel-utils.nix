@@ -11,7 +11,7 @@ in
     ]
     ++ (
       if config.devlive.features.desktop.gnome.enable then
-        with pkgs; [cartero]
+        with pkgs; [cartero gaphor]
       else
         []
     );
