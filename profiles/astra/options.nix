@@ -56,4 +56,5 @@
 
   devlive.virtualisation.libvirtd.enable = true;
   devlive.virtualisation.podman.enable = true;
+  devlive.virtualisation.waydroid.enable = true;
 }
