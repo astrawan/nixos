@@ -4,7 +4,7 @@
 {
   imports = [
     ../../modules/home-manager
-    ../../profiles/astra/options.nix
+    ../../profiles/astra-wsl/options.nix
   ];
 
   # Allow unfree packages

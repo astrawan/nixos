@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -9,13 +9,15 @@
     ./tiling-shell.nix
   ];
 
-  dconf.settings."org/gnome/shell" = {
-    enabled-extensions = with pkgs.gnomeExtensions; [
-      appindicator.extensionUuid
-      gsconnect.extensionUuid
-      logo-menu.extensionUuid
-      tailscale-qs.extensionUuid
-      tiling-shell.extensionUuid
-    ];
+  config = lib.mkIf config.devlive.features.desktop.gnome.enable {
+    dconf.settings."org/gnome/shell" = {
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        appindicator.extensionUuid
+        gsconnect.extensionUuid
+        logo-menu.extensionUuid
+        tailscale-qs.extensionUuid
+        tiling-shell.extensionUuid
+      ];
+    };
   };
 }

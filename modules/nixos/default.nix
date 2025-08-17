@@ -8,5 +8,6 @@
     ./boot.nix
     ./networking.nix
     ./users.nix
+    ./wsl.nix
   ];
 }

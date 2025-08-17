@@ -7,5 +7,6 @@
     ./services
     ./user.nix
     ./virtualisation
+    ./wsl.nix
   ];
 }
