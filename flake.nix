@@ -8,7 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs = { nixpkgs, nixos-wsl, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -17,28 +17,78 @@
       nixosConfigurations = {
         pandorabox = lib.nixosSystem {
           inherit system;
-          modules = [ ./nixos/pandorabox/configuration.nix ];
+          modules = [
+            nixos-wsl.nixosModules.default
+            ({ ... }: {
+              imports = [
+                ./modules/options
+                ./modules/nixos
+                ./profiles/astra/options.nix
+                ./profiles/astra/extra-options.nix
+                ./nixos/pandorabox/configuration.nix
+              ];
+            })
+          ];
         };
         pandorabox-v2 = lib.nixosSystem {
           inherit system;
-          modules = [ ./nixos/pandorabox-v2/configuration.nix ];
+          modules = [
+            nixos-wsl.nixosModules.default
+            ({ ... }: {
+              imports = [
+                ./modules/options
+                ./modules/nixos
+                ./profiles/astra/options.nix
+                ./profiles/astra/extra-options.nix
+                ./nixos/pandorabox-v2/configuration.nix
+              ];
+            })
+          ];
         };
         pandorabox-wsl = lib.nixosSystem {
           inherit system;
           modules = [
             nixos-wsl.nixosModules.default
-            ./nixos/pandorabox-wsl/configuration.nix
+            ({ ... }: {
+              imports = [
+                ./modules/options
+                ./modules/nixos
+                ./profiles/astra/options.nix
+                ./profiles/astra/extra-wsl-options.nix
+                ./nixos/pandorabox-wsl/configuration.nix
+              ];
+            })
           ];
         };
       };
       homeConfigurations = {
         astra = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home-manager/astra/home.nix ];
+          modules = [
+            ({ ... }: {
+              imports = [
+                ./modules/options
+                ./modules/home-manager
+                ./profiles/astra/options.nix
+                ./profiles/astra/extra-options.nix
+                ./home-manager/astra/home.nix
+              ];
+            })
+          ];
         };
         astra-wsl = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home-manager/astra-wsl/home.nix ];
+          modules = [
+            ({ ... }: {
+              imports = [
+                ./modules/options
+                ./modules/home-manager
+                ./profiles/astra/options.nix
+                ./profiles/astra/extra-wsl-options.nix
+                ./home-manager/astra/home.nix
+              ];
+            })
+          ];
         };
       };
     };

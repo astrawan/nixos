@@ -80,6 +80,7 @@ in
         else
           []
       );
+      last-selected-power-profile = "power";
     };
     dconf.settings."org/gnome/shell/keybindings" = {
       # Remove the default hotkeys for opening favorited applications.

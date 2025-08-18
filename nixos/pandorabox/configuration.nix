@@ -9,8 +9,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../profiles/astra/options.nix
-      ../../modules/nixos
     ];
 
   boot.initrd.luks.devices."luks-cd64b8dc-54f2-4d38-b7b4-e1d83c5e18e9".device = "/dev/disk/by-uuid/cd64b8dc-54f2-4d38-b7b4-e1d83c5e18e9";

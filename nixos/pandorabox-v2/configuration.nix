@@ -9,8 +9,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../profiles/astra/options.nix
-      ../../modules/nixos
     ];
 
   networking.hostName = "pandorabox-v2"; # Define your hostname.

@@ -8,11 +8,6 @@
 { ... }:
 
 {
-  imports = [
-    ../../profiles/astra-wsl/options.nix
-    ../../modules/nixos
-  ];
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default

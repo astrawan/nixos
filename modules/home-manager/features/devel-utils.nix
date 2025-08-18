@@ -20,5 +20,7 @@ in
     programs.fzf.enable = true;
     programs.neovim.enable = true;
     programs.ripgrep.enable = true;
+
+    devlive.programs.lazygit.enable = true;
   };
 }

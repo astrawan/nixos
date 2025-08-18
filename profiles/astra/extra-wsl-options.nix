@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  devlive.wsl.enable = true;
+}

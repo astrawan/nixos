@@ -2,11 +2,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../../modules/home-manager
-    ../../profiles/astra/options.nix
-  ];
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
