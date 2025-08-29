@@ -12,6 +12,7 @@ in
       gnome-extension-manager
       gnome-tweaks
       inkscape
+      lock
       nerd-fonts.fira-code
       remmina
     ];
