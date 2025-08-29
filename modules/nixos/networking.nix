@@ -33,6 +33,7 @@
       ];
       allowedTCPPorts = [];
       allowedUDPPorts = [];
+      checkReversePath = "loose";
       # extraCommands = '''';
       # extraStopCommands = '''';
       interfaces = {

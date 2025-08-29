@@ -8,6 +8,7 @@ in
     services.tailscale = {
       disableTaildrop = true;
       enable = true;
+      useRoutingFeatures = "both";
     };
   };
 }
