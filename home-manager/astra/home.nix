@@ -122,6 +122,44 @@
         user = "git";
         identityFile = "~/.private/id_ed25519_bitbucket_ts";
       };
+      "controlplane.node.devlive.cloud.1" = {
+        hostname = "controlplane.node.devlive.cloud";
+        port = 22;
+        user = "ubuntu";
+        identityFile = "~/.private/id_ed25519_rhel";
+      };
+      "controlplane.node.devlive.cloud.2" = {
+        hostname = "controlplane.node.devlive.cloud";
+        port = 22;
+        user = "vpnadmin";
+        identityFile = "~/.private/id_ed25519_vpnadmin";
+      };
     };
+    extraConfig = "
+Host localhost
+  HostName    localhost
+  Port        8101
+  HostKeyAlgorithms=+ssh-rsa
+Host localhost
+  HostName    localhost
+  Port        8102
+  HostKeyAlgorithms=+ssh-rsa
+Host localhost
+  HostName    localhost
+  Port        8103
+  HostKeyAlgorithms=+ssh-rsa
+Host localhost
+  HostName    localhost
+  Port        8104
+  HostKeyAlgorithms=+ssh-rsa
+Host localhost
+  HostName    localhost
+  Port        8105
+  HostKeyAlgorithms=+ssh-rsa
+Host localhost
+  HostName    localhost
+  Port        8106
+  HostKeyAlgorithms=+ssh-rsa
+    ";
   };
 }
