@@ -7,6 +7,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       dconf-editor
+      foliate
       fragments
       gimp
       gnome-extension-manager
