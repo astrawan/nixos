@@ -80,6 +80,9 @@
       commit = {
         gpgsign = true;
       };
+      fetch = {
+        prune = true;
+      };
       tag = {
         forceSignAnnotated = true;
       };
