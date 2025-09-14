@@ -25,7 +25,7 @@
 
   devlive.services.flatpak.enable = true;
   devlive.services.opensnitch.enable = true;
-  devlive.services.openssh.enable = true;
+  devlive.services.openssh.enable = false;
   devlive.services.pipewire.enable = true;
   devlive.services.tailscale.enable = true;
   devlive.services.usbguard.enable = true;
