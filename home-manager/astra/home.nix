@@ -25,6 +25,7 @@
     if config.devlive.features.desktop.gnome.enable then
       with pkgs; [
         aegisub
+        gradia
         libreoffice
         popcorntime
         wireshark
