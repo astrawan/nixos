@@ -263,6 +263,7 @@ in
           }
         ]
       '';
+      show-indicator = false;
       untile-window = ["<Control>Return"];
     };
   };
