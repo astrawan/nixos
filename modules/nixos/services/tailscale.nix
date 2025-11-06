@@ -8,6 +8,10 @@ in
     services.tailscale = {
       disableTaildrop = true;
       enable = true;
+      extraSetFlags = [
+        "--operator"
+        "${config.devlive.user.name}"
+      ];
       useRoutingFeatures = "both";
     };
   };
