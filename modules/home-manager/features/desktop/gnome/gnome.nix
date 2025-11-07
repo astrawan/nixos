@@ -20,8 +20,8 @@ in
 
     dconf.enable = true;
     dconf.settings."org/gnome/desktop/background" = {
-      picture-uri = "/run/current-system/sw/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
-      picture-uri-dark = "/run/current-system/sw/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
+      picture-uri = "/home/${config.devlive.user.name}/.dotfiles/assets/wallpapers/background-6556413.jpg";
+      picture-uri-dark = "/home/${config.devlive.user.name}/.dotfiles/assets/wallpapers/background-6556413.jpg";
     };
     dconf.settings."org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";

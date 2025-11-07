@@ -9,14 +9,20 @@ in
       gnomeExtensions.dash-to-dock
     ];
 
-    # dconf.settings."org/gnome/shell/extensions/Logo-menu" = {
-    #     # Use right click to open Activities.
-    #     menu-button-icon-click-type = 3;
-    #
-    #     # Use the NixOS logo.
-    #     menu-button-icon-image = 23;
-    #
-    #     menu-button-terminal = "ghostty";
-    # };
+    dconf.settings."org/gnome/shell/extensions/dash-to-dock" = {
+      background-color = "rgb(0,0,0)";
+      custom-background-color = true;
+      customize-alphas = true;
+      disable-overview-on-startup = true;
+      dock-fixed = true;
+      dock-posistion = "BOTTOM";
+      extend-height = false;
+      hot-keys = true;
+      intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
+      max-alpha = 1.0;
+      min-alpha = 0.2;
+      require-pressure-to-show = true;
+      transparency-mode = "DYNAMIC";
+    };
   };
 }
