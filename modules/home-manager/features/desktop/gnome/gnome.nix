@@ -134,6 +134,7 @@ in
       font-family = "FiraCode Nerd Font Mono";
       font-style = "SemiBold";
       font-size = 12;
+      term = "xterm-256color";
       theme = "Adwaita Dark";
       window-padding-x = 8;
     };
