@@ -17,6 +17,7 @@ in
       nerd-fonts.fira-code
       remmina
       telegram-desktop
+      zoom-us
     ];
 
     dconf.enable = true;
@@ -87,6 +88,15 @@ in
       ++ (
         if config.devlive.programs.folio.enable then
           ["com.toolstack.Folio.desktop"]
+        else
+          []
+      )
+      ++ [
+        "org.telegram.desktop.desktop"
+      ]
+      ++ (
+        if config.devlive.features.devel-utils.enable then
+          ["dbeaver.desktop"]
         else
           []
       );
