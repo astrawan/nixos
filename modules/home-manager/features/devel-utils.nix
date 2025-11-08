@@ -11,7 +11,7 @@ in
     ]
     ++ (
       if config.devlive.features.desktop.gnome.enable then
-        with pkgs; [cartero dbeaver-bin gaphor]
+        with pkgs; [brave cartero dbeaver-bin gaphor]
       else
         []
     );
