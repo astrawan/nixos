@@ -41,4 +41,26 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Enable TRIM for NVMe SSD
+  services.fstrim = {
+    enable = true;
+    interval = "weekly";
+  };
+
+  # Hardware configuration and acceleration
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver       # VA-API for video
+      intel-compute-runtime    # OpenCL/Vulkan for Intel
+      mesa                     # Main drivers (mesa.drivers)
+      vulkan-loader            # Vulkan
+      vulkan-tools
+      vulkan-validation-layers
+      dxvk
+      vkd3d-proton
+    ];
+  };
+  environment.variables.LIBVA_DRIVER_NAME = "iHD";
 }
