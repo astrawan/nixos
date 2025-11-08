@@ -71,7 +71,14 @@ in
       disable-user-extensions = false;
       favorite-apps = [
         "org.gnome.Software.desktop"
-        "org.gnome.Epiphany.desktop"
+      ]
+      ++ (
+        if config.devlive.programs.zen-browser.enable then
+          ["zen-beta.desktop"]
+        else
+          ["org.gnome.Epiphany.desktop"]
+      )
+      ++ [
         "org.gnome.Evolution.desktop"
         "org.gnome.Nautilus.desktop"
         "com.mitchellh.ghostty.desktop"

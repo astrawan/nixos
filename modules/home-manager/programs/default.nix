@@ -6,5 +6,6 @@
     ./keystore-explorer.nix
     ./lazygit.nix
     ./tmux.nix
+    ./zen-browser.nix
   ];
 }

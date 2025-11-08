@@ -6,9 +6,11 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/release-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs = { nixpkgs, nixos-wsl, home-manager, zen-browser, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -67,6 +69,7 @@
           modules = [
             ({ ... }: {
               imports = [
+                zen-browser.homeModules.beta
                 ./modules/options
                 ./modules/home-manager
                 ./profiles/astra/options.nix
