@@ -16,6 +16,7 @@ in
       lock
       nerd-fonts.fira-code
       remmina
+      telegram-desktop
     ];
 
     dconf.enable = true;
