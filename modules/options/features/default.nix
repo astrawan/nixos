@@ -4,5 +4,6 @@
     ./desktop
     ./devel-android.nix
     ./devel-utils.nix
+    ./yubikey.nix
   ];
 }

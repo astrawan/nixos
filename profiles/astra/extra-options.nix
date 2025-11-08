@@ -3,6 +3,7 @@
 {
   devlive.features.desktop.gnome.enable = true;
   devlive.features.devel-android.enable = true;
+  devlive.features.yubikey.enable = true;
 
   devlive.programs.bash.enable = true;
   devlive.programs.deja-dup = {
