@@ -7,6 +7,7 @@
     ./lazygit.nix
     ./librewolf.nix
     ./tmux.nix
+    ./vaults.nix
     ./zen-browser.nix
   ];
 }

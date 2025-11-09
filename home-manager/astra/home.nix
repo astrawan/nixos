@@ -100,37 +100,37 @@
         hostname = "bitbucket.stack.devlive.cloud";
         port = 22;
         user = "git";
-        identityFile = "~/.private/id_ed25519_sk_git_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
       };
       "firewall.node.vpn.devlive.cloud" = {
         hostname = "firewall.node.vpn.devlive.cloud";
         port = 2222;
         user = "puffy";
-        identityFile = "~/.private/id_ed25519_sk_srv_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
       };
       "gitlab.com" = {
         hostname = "gitlab.com";
         port = 22;
         user = "astrawan";
-        identityFile = "~/.private/id_ed25519_sk_git_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
       };
       "github.com" = {
         hostname = "github.com";
         port = 22;
         user = "git";
-        identityFile = "~/.private/id_ed25519_sk_git_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
       };
       "controlplane.node.devlive.cloud.1" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "ubuntu";
-        identityFile = "~/.private/id_ed25519_sk_srv_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
       };
       "controlplane.node.devlive.cloud.2" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "vpnadmin";
-        identityFile = "~/.private/id_ed25519_sk_srv_1";
+        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
       };
     };
     extraConfig = "

@@ -23,6 +23,12 @@
   };
   devlive.programs.keystore-explorer.enable = true;
   devlive.programs.librewolf.enable = true;
+  devlive.programs.vaults = {
+    enable = true;
+    settings = {
+      encrypted_data_directory = "/home/${config.devlive.user.name}/Documents/Synchronizable/Vaults";
+    };
+  };
 
   devlive.security.auditd.enable = true;
 
