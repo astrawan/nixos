@@ -22,7 +22,7 @@
     trash-dir = "/home/${config.devlive.user.name}/Documents/Synchronizable/Folio/Trash";
   };
   devlive.programs.keystore-explorer.enable = true;
-  devlive.programs.zen-browser.enable = true;
+  devlive.programs.librewolf.enable = true;
 
   devlive.security.auditd.enable = true;
 

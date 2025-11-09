@@ -75,10 +75,16 @@ in
         "org.gnome.Software.desktop"
       ]
       ++ (
+        if config.devlive.programs.librewolf.enable then
+          ["librewolf.desktop"]
+        else
+          []
+      )
+      ++ (
         if config.devlive.programs.zen-browser.enable then
           ["zen-beta.desktop"]
         else
-          ["org.gnome.Epiphany.desktop"]
+          []
       )
       ++ [
         "org.gnome.Evolution.desktop"
