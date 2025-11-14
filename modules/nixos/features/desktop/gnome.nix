@@ -17,6 +17,7 @@ in
     };
     environment.gnome.excludePackages = (with pkgs; [
       decibels
+      evince
       geary
       gnome-console
       gnome-music
@@ -32,7 +33,11 @@ in
     environment.systemPackages = with pkgs; [
       adwaita-qt
       adwaita-qt6
+      gnome-decoder
+      gnome-obfuscate
       gnome-software
+      iotas
+      papers
       nixos-artwork.wallpapers.simple-blue
       ghostty
       showtime
@@ -46,7 +51,8 @@ in
     xdg.mime = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = "org.gnome.Evince.desktop";
+        "application/pdf" = "org.gnome.Papers.desktop";
+        "text/plain" = "org.gnome.TextEditor.desktop";
       };
     };
   };
