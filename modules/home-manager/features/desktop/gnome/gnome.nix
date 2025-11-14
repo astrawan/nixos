@@ -20,6 +20,56 @@ in
       zoom-us
     ];
 
+    xdg.mimeApps.defaultApplications = {
+      "x-scheme-handler/tg" = "org.telegram.desktop.desktop";
+      "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
+
+      "image/jpeg" = "org.gnome.Loupe.desktop";
+      "image/png" = "org.gnome.Loupe.desktop";
+      "image/gif" = "org.gnome.Loupe.desktop";
+      "image/webp" = "org.gnome.Loupe.desktop";
+      "image/tiff" = "org.gnome.Loupe.desktop";
+      "image/x-tga" = "org.gnome.Loupe.desktop";
+      "image/vnd-ms.dds" = "org.gnome.Loupe.desktop";
+      "image/x-dds" = "org.gnome.Loupe.desktop";
+      "image/bmp" = "org.gnome.Loupe.desktop";
+      "image/vnd.microsoft.icon" = "org.gnome.Loupe.desktop";
+      "image/vnd.radiance" = "org.gnome.Loupe.desktop";
+      "image/x-exr" = "org.gnome.Loupe.desktop";
+      "image/x-portable-bitmap" = "org.gnome.Loupe.desktop";
+      "image/x-portable-graymap" = "org.gnome.Loupe.desktop";
+      "image/x-portable-pixmap" = "org.gnome.Loupe.desktop";
+      "image/x-portable-anymap" = "org.gnome.Loupe.desktop";
+      "image/x-qoi" = "org.gnome.Loupe.desktop";
+      "image/qoi" = "org.gnome.Loupe.desktop";
+      "image/svg+xml" = "org.gnome.Loupe.desktop";
+      "image/svg+xml-compressed" = "org.gnome.Loupe.desktop";
+      "image/avif" = "org.gnome.Loupe.desktop";
+      "image/heic" = "org.gnome.Loupe.desktop";
+      "image/jxl" = "org.gnome.Loupe.desktop";
+      "image/g3fax" = "gimp.desktop";
+      "image/x-fits" = "gimp.desktop";
+      "image/x-pcx" = "gimp.desktop";
+      "image/x-psd" = "gimp.desktop";
+      "image/x-sgi" = "gimp.desktop";
+      "image/x-xbitmap" = "gimp.desktop";
+      "image/x-xwindowdump" = "gimp.desktop";
+      "image/x-xcf" = "gimp.desktop";
+      "image/x-compressed-xcf" = "gimp.desktop";
+      "image/x-gimp-gbr" = "gimp.desktop";
+      "image/x-gimp-pat" = "gimp.desktop";
+      "image/x-gimp-gih" = "gimp.desktop";
+      "image/x-sun-raster" = "gimp.desktop";
+      "image/x-psp" = "gimp.desktop";
+      "image/x-icon" = "gimp.desktop";
+      "image/x-xpixmap" = "gimp.desktop";
+      "image/x-webp" = "gimp.desktop";
+      "image/heif" = "gimp.desktop";
+      "image/x-wmf" = "gimp.desktop";
+      "image/jp2" = "gimp.desktop";
+      "image/x-xcursor" = "gimp.desktop";
+    };
+
     dconf.enable = true;
     dconf.settings."org/gnome/desktop/background" = {
       picture-uri = "/home/${config.devlive.user.name}/.dotfiles/assets/wallpapers/background-6556413.jpg";
