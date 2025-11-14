@@ -15,13 +15,6 @@
     };
     periodic = true;
   };
-  devlive.programs.folio = {
-    enable = true;
-    enable-autosave = true;
-    note-font-monospace = "FiraCode Nerd Font Mono Medium 10";
-    notes-dir = "/home/${config.devlive.user.name}/Documents/Synchronizable/Folio/Notes";
-    trash-dir = "/home/${config.devlive.user.name}/Documents/Synchronizable/Folio/Trash";
-  };
   devlive.programs.keystore-explorer.enable = true;
   devlive.programs.vaults = {
     enable = true;
