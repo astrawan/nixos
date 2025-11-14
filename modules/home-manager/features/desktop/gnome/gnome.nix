@@ -125,6 +125,12 @@ in
         "org.gnome.Software.desktop"
       ]
       ++ (
+        if config.devlive.programs.brave.enable then
+          ["brave-browser.desktop"]
+        else
+          []
+      )
+      ++ (
         if config.devlive.programs.librewolf.enable then
           ["librewolf.desktop"]
         else

@@ -6,6 +6,7 @@
   devlive.features.yubikey.enable = true;
 
   devlive.programs.bash.enable = true;
+  devlive.programs.brave.enable = true;
   devlive.programs.deja-dup = {
     enable = true;
     include-list = ["/home/${config.devlive.user.name}/Documents/Synchronizable"];
@@ -22,7 +23,6 @@
     trash-dir = "/home/${config.devlive.user.name}/Documents/Synchronizable/Folio/Trash";
   };
   devlive.programs.keystore-explorer.enable = true;
-  devlive.programs.librewolf.enable = true;
   devlive.programs.vaults = {
     enable = true;
     settings = {

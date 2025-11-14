@@ -1,6 +1,7 @@
 {
   imports = [
     ./bash.nix
+    ./brave.nix
     ./deja-dup.nix
     ./folio.nix
     ./gnupg.nix
