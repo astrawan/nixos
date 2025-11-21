@@ -121,13 +121,13 @@
         user = "git";
         identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
       };
-      "controlplane.node.devlive.cloud.1" = {
+      "ubuntu.controlplane.node.devlive.cloud" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "ubuntu";
         identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
       };
-      "controlplane.node.devlive.cloud.2" = {
+      "vpnadmin.controlplane.node.devlive.cloud" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "vpnadmin";
