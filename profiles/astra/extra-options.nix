@@ -22,6 +22,7 @@
       encrypted_data_directory = "/home/${config.devlive.user.name}/Documents/Synchronizable/Vaults";
     };
   };
+  devlive.programs.zen-browser.enable = true;
 
   devlive.security.auditd.enable = true;
 
