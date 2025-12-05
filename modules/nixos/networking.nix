@@ -39,7 +39,7 @@
       interfaces = {
         # virtualisation NAT interface
         virbr0 = {
-          allowedTCPPorts = [ 22 5432 6379 8080 ];
+          allowedTCPPorts = [ 22 5173 5432 6379 8080 ];
         };
       };
     };
