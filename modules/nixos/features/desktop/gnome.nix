@@ -5,12 +5,8 @@ let
 in 
 {
   config = lib.mkIf cfg.enable {
-    # Enable the X11 windowing system.
-    services.xserver.enable = true;
-    services.xserver.excludePackages = [ pkgs.xterm ];
-
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
     services.displayManager.autoLogin = {
       enable = true;
       user = "${config.devlive.user.name}";
@@ -23,12 +19,6 @@ in
       gnome-music
       totem
     ]);
-
-    # Configure keymap in X11
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
 
     environment.systemPackages = with pkgs; [
       adwaita-qt

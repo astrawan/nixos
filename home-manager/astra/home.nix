@@ -17,7 +17,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -76,9 +76,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "${config.devlive.user.email}";
-    userName = "${config.devlive.user.fullName}";
-    extraConfig = {
+    settings = {
       commit = {
         gpgsign = true;
       };
@@ -90,12 +88,15 @@
       };
       user = {
         signingkey = "A6113EB4F50442EA";
+        email = "${config.devlive.user.email}";
+        name = "${config.devlive.user.fullName}";
       };
     };
   };
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "bitbucket.stack.devlive.cloud" = {
         hostname = "bitbucket.stack.devlive.cloud";
@@ -133,32 +134,48 @@
         user = "vpnadmin";
         identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
       };
+      "localhost.1" = {
+        hostname = "localhost";
+        port = 8101;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
+      "localhost.2" = {
+        hostname = "localhost";
+        port = 8102;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
+      "localhost.3" = {
+        hostname = "localhost";
+        port = 8103;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
+      "localhost.4" = {
+        hostname = "localhost";
+        port = 8104;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
+      "localhost.5" = {
+        hostname = "localhost";
+        port = 8105;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
+      "localhost.6" = {
+        hostname = "localhost";
+        port = 8106;
+        extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
     };
-    extraConfig = "
-Host localhost
-  HostName    localhost
-  Port        8101
-  HostKeyAlgorithms=+ssh-rsa
-Host localhost
-  HostName    localhost
-  Port        8102
-  HostKeyAlgorithms=+ssh-rsa
-Host localhost
-  HostName    localhost
-  Port        8103
-  HostKeyAlgorithms=+ssh-rsa
-Host localhost
-  HostName    localhost
-  Port        8104
-  HostKeyAlgorithms=+ssh-rsa
-Host localhost
-  HostName    localhost
-  Port        8105
-  HostKeyAlgorithms=+ssh-rsa
-Host localhost
-  HostName    localhost
-  Port        8106
-  HostKeyAlgorithms=+ssh-rsa
-    ";
   };
 }
