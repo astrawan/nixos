@@ -30,7 +30,24 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  # hibernation
+  boot.kernelParams = [ "resume_offset=47532032" "mem_sleep_default=deep" ];
+  boot.resumeDevice = "/dev/disk/by-uuid/6d848414-7ed6-4c03-9d19-23f7d9b9ecb6";
+  powerManagement.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.powerKey = "hibernate";
+  services.logind.powerKeyLongPress = "poweroff";
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+    SuspendState=mem
+    '';
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 32 * 1024; # 32GB in MB
+    }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
