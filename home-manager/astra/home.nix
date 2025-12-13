@@ -102,37 +102,55 @@
         hostname = "bitbucket.stack.devlive.cloud";
         port = 22;
         user = "git";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_git_1"
+          "~/Vaults/SSH/id_ed25519_sk_git_2"
+        ];
       };
       "firewall.node.vpn.devlive.cloud" = {
         hostname = "firewall.node.vpn.devlive.cloud";
         port = 2222;
         user = "puffy";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_srv_1"
+          "~/Vaults/SSH/id_ed25519_sk_srv_2"
+        ];
       };
       "gitlab.com" = {
         hostname = "gitlab.com";
         port = 22;
         user = "astrawan";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_git_1"
+          "~/Vaults/SSH/id_ed25519_sk_git_2"
+        ];
       };
       "github.com" = {
         hostname = "github.com";
         port = 22;
         user = "git";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_git_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_git_1"
+          "~/Vaults/SSH/id_ed25519_sk_git_2"
+        ];
       };
       "ubuntu.controlplane.node.devlive.cloud" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "ubuntu";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_srv_1"
+          "~/Vaults/SSH/id_ed25519_sk_srv_2"
+        ];
       };
       "vpnadmin.controlplane.node.devlive.cloud" = {
         hostname = "controlplane.node.devlive.cloud";
         port = 22;
         user = "vpnadmin";
-        identityFile = "~/Vaults/SSH/id_ed25519_sk_srv_1";
+        identityFile = [
+          "~/Vaults/SSH/id_ed25519_sk_srv_1"
+          "~/Vaults/SSH/id_ed25519_sk_srv_2"
+        ];
       };
       "localhost.1" = {
         hostname = "localhost";
