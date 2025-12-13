@@ -7,6 +7,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       ast-grep
+      inotify-tools
       tree-sitter
     ]
     ++ (
