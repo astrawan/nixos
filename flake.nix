@@ -6,15 +6,17 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/release-25.11";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixos-wsl, home-manager, zen-browser, ... }:
+  outputs = { nixpkgs, nixos-wsl, home-manager, noctalia, zen-browser, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = (nixpkgs.legacyPackages.${system}.extend noctalia.overlays.default);
     in {
       nixosConfigurations = {
         pandorabox = lib.nixosSystem {
@@ -69,6 +71,7 @@
           modules = [
             ({ ... }: {
               imports = [
+                noctalia.homeModules.default
                 zen-browser.homeModules.beta
                 ./modules/options
                 ./modules/home-manager

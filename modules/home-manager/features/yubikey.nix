@@ -5,11 +5,8 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    home.packages = (
-      if config.devlive.features.desktop.gnome.enable then
-        with pkgs; [yubioath-flutter]
-      else
-        []
-    );
+    home.packages = with pkgs; [
+      yubioath-flutter
+    ];
   };
 }
