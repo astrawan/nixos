@@ -31,6 +31,13 @@
         wireshark
         wl-clipboard
       ]
+    else if config.devlive.features.desktop.noctalia-shell.enable then
+      with pkgs; [
+        aegisub
+        libreoffice
+        popcorntime
+        wireshark
+      ]
     else
       []
   );

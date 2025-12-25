@@ -1,7 +1,8 @@
 { config, ... }:
 
 {
-  devlive.features.desktop.gnome.enable = true;
+  devlive.features.desktop.gnome.enable = false;
+  devlive.features.desktop.noctalia-shell.enable = true;
   devlive.features.devel-android.enable = true;
   devlive.features.yubikey.enable = true;
 
