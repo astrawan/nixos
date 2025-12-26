@@ -114,8 +114,8 @@
           "~/Vaults/SSH/id_ed25519_sk_git_2"
         ];
       };
-      "firewall.node.vpn.devlive.cloud" = {
-        hostname = "firewall.node.vpn.devlive.cloud";
+      "firewall.node.devlive.cloud" = {
+        hostname = "firewall.node.devlive.cloud";
         port = 2222;
         user = "puffy";
         identityFile = [
