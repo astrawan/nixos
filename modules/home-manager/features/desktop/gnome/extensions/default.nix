@@ -6,7 +6,6 @@
     ./blur-my-shell.nix
     ./dash-to-dock.nix
     ./gsconnect.nix
-    ./logo-menu.nix
     ./tailscale-qs.nix
     ./tiling-shell.nix
   ];
@@ -18,7 +17,6 @@
         blur-my-shell.extensionUuid
         dash-to-dock.extensionUuid
         gsconnect.extensionUuid
-        logo-menu.extensionUuid
         tailscale-qs.extensionUuid
         tiling-shell.extensionUuid
       ];
