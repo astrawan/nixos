@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   config = lib.mkIf (!config.devlive.wsl.enable) {
@@ -9,7 +9,12 @@
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Enable networking
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openconnect
+      ];
+    };
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];
