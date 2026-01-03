@@ -38,6 +38,10 @@ in
       wayland.enable = true;
     };
     services.power-profiles-daemon.enable = true;
+
+    # enable usb auto-mount
+    services.udisks2.enable = true;
+
     services.upower.enable = true;
   };
 }

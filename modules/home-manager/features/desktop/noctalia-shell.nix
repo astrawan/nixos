@@ -86,6 +86,7 @@ in
                 pinned = [
                   "nm-applet"
                   "opensnitch-ui"
+                  "udiskie"
                 ];
               }
               {
@@ -403,6 +404,14 @@ in
             on-resume = "hyprctl dispatch dpms on";
           }
         ];
+      };
+    };
+    services.udiskie = {
+      enable = true;
+      settings = {
+        program_options = {
+          file_manager = "ghostty -e yazi";
+        };
       };
     };
 
