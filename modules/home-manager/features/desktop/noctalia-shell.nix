@@ -18,7 +18,9 @@ in
       libsForQt5.qt5ct
       nerd-fonts.fira-code
       networkmanagerapplet
+      qbittorrent
       telegram-desktop
+      termscp
       wl-clipboard
     ];
     devlive.programs.ghostty.enable = true;
