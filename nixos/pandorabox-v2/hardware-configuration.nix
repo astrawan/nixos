@@ -23,6 +23,7 @@
     };
 
   boot.initrd.luks.devices."luks-9c1cb217-1e15-4bf2-b385-e5a1915eb984".device = "/dev/disk/by-uuid/9c1cb217-1e15-4bf2-b385-e5a1915eb984";
+  boot.initrd.luks.devices."luks-3d11f8b0-f7c0-4560-8294-4d8dffb0829b".device = "/dev/disk/by-uuid/3d11f8b0-f7c0-4560-8294-4d8dffb0829b";
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/A839-B999";
@@ -30,22 +31,21 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  # hibernation
-  boot.kernelParams = [ "resume_offset=47532032" "mem_sleep_default=deep" ];
-  boot.resumeDevice = "/dev/disk/by-uuid/6d848414-7ed6-4c03-9d19-23f7d9b9ecb6";
-  powerManagement.enable = true;
+  # enable hibernate
+  boot.kernelParams = ["mem_sleep_default=deep"];
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
   services.power-profiles-daemon.enable = true;
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.powerKey = "hibernate";
-  services.logind.powerKeyLongPress = "poweroff";
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-    SuspendState=mem
-    '';
+  services.logind = {
+    lidSwitch = "hibernate";
+    powerKey = "hibernate";
+    powerKeyLongPress = "poweroff";
+  };
   swapDevices = [
     {
-      device = "/var/lib/swapfile";
-      size = 32 * 1024; # 32GB in MB
+      device = "/dev/disk/by-uuid/b5c1c4d8-dab8-4404-985f-d7034a08afb5";
     }
   ];
 
