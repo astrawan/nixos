@@ -29,6 +29,7 @@
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
     ];
+  boot.blacklistedKernelModules = [ "mmc_block" ];
     boot.plymouth = {
       enable = true;
       theme = "bgrt";
