@@ -39,9 +39,11 @@
   };
   services.power-profiles-daemon.enable = true;
   services.logind = {
-    lidSwitch = "hibernate";
-    powerKey = "hibernate";
-    powerKeyLongPress = "poweroff";
+    settings.Login = {
+      HandleLidSwitch = "hibernate";
+      HandlePowerKey = "hibernate";
+      HandlePowerKeyLongPress = "poweroff";
+    };
   };
   swapDevices = [
     {
