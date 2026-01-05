@@ -110,8 +110,9 @@
         port = 22;
         user = "git";
         identityFile = [
-          "~/Vaults/SSH/id_ed25519_sk_git_1"
-          "~/Vaults/SSH/id_ed25519_sk_git_2"
+          # fallback to use regular SSH key, SSH with hardware security key is
+          # not supported by the bitbucket server
+          "~/Vaults/SSH/id_ed25519_bitbucket_ts"
         ];
       };
       "firewall.node.devlive.cloud" = {
