@@ -242,6 +242,7 @@ in
           "$mod SHIFT , B                     , exec            , noctalia-shell ipc call battery togglePanel"
           "$mod       , C                     , killactive"
           "$mod SHIFT , C                     , exec            , noctalia-shell ipc call controlCenter toggle"
+          "$mod SHIFT , D                     , exec            , noctalia-shell ipc call calendar toggle"
           "$mod       , E                     , exec            , $fileManager"
           "$mod       , F                     , fullscreen      , 1"
           "$mod       , M                     , exec            , $sysMonitor"
