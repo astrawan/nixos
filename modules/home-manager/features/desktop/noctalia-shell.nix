@@ -135,6 +135,7 @@ in
         };
         colorSchemes.predefinedScheme = "Noctalia (default)";
         general = {
+          allowPanelsOnScreenWithoutBar = false;
           enableShadows = false;
           showScreenCorners = true;
         };
