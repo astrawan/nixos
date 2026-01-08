@@ -136,8 +136,10 @@ in
         colorSchemes.predefinedScheme = "Noctalia (default)";
         general = {
           allowPanelsOnScreenWithoutBar = false;
+          compactLockScreen = true;
           enableShadows = false;
           showScreenCorners = true;
+          showSessionButtonsOnLockScreen = false;
         };
         location = {
           name = "Kuta, Indonesia";
