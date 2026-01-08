@@ -226,6 +226,13 @@ in
     };
     # Document viewer
     programs.zathura.enable = true;
+    # Enable zen browser transparency and custom layout
+    programs.zen-browser.profiles.default.settings = lib.mkIf config.devlive.programs.zen-browser.enable {
+      "zen.view.compact.hide-tabbar" = true;
+      "zen.view.compact.hide-toolbar" = false;
+      "zen.view.grey-out-inactive-windows" = false;
+      "zen.widget.linux.transparency" = true;
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
@@ -351,6 +358,7 @@ in
         };
         layerrule = [
           "blur,com.mitchellh.ghostty"
+          "blur,zen-beta"
         ];
         monitor = ",preferred,auto,1";
         windowrule = [
