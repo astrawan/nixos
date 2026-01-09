@@ -420,6 +420,7 @@ in
         ];
       };
     };
+    services.tailscale-systray.enable = true;
     services.udiskie = {
       enable = true;
       settings = {
