@@ -21,7 +21,7 @@ in
       qbittorrent
       telegram-desktop
       termscp
-      wl-clipboard
+      wayclip
     ];
     devlive.programs.ghostty.enable = true;
     programs.ghostty.settings = {
