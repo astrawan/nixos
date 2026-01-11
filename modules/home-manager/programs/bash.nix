@@ -9,7 +9,6 @@ in
       enable = true;
       bashrcExtra = ''
         . $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-        eval $(starship init bash)
       '';
       sessionVariables = {
         EDITOR = "vim";
