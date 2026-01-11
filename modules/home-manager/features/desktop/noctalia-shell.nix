@@ -11,6 +11,8 @@ in
       bazaar
       freerdp
       gimp
+      # noctalia-shell gtk4 color schema integration
+      glib
       kdePackages.breeze-icons
       kdePackages.qt6ct
       inkscape
