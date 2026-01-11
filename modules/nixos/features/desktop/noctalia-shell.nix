@@ -6,6 +6,11 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    environment.variables = {
+      MOZ_ENABLE_WAYLAND = "1";
+      NIXOS_OZONE_WL = "1";
+      QT_QPA_PLATFORMTHEME="qt6ct";
+    };
     fonts = {
       fontDir.enable = true;
       packages = with pkgs; [

@@ -348,11 +348,6 @@ in
           # Enable move window focus on fullscreen mode
           movefocus_cycles_fullscreen = true;
         };
-        env = [
-          "MOZ_ENABLE_WAYLAND,1"
-          "NIXOS_OZONE_WL,1"
-          "QT_QPA_PLATFORMTHEME,qt6ct"
-        ];
         decoration = {
           rounding = 14;
           active_opacity = 1.0;
