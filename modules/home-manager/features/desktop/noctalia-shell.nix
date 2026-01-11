@@ -8,7 +8,6 @@ in
     home.packages = with pkgs; [
       adw-gtk3
       adwaita-icon-theme
-      adwaita-fonts
       bazaar
       freerdp
       gimp
@@ -16,7 +15,6 @@ in
       kdePackages.qt6ct
       inkscape
       libsForQt5.qt5ct
-      nerd-fonts.fira-code
       networkmanagerapplet
       qbittorrent
       telegram-desktop
@@ -30,8 +28,8 @@ in
         icon_theme = "breeze-dark";
       };
       Fonts = {
-        fixed = ''"FiraCode Nerd Font Mono Med,12,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
-        general = ''"FiraCode Nerd Font Med,12,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+        fixed = ''"FiraCode Nerd Font Mono Med,11,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+        general = ''"DejaVu Sans,11,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
       };
     };
     home.file.".config/qt5ct/qt5ct.conf".text = lib.generators.toINI {} {
@@ -41,8 +39,8 @@ in
         icon_theme = "breeze-dark";
       };
       Fonts = {
-        fixed = ''"FiraCode Nerd Font Mono Med,12,-1,5,57,0,0,0,0,0,Regular"'';
-        general = ''"FiraCode Nerd Font Med,12,-1,5,57,0,0,0,0,0,Regular"'';
+        fixed = ''"FiraCode Nerd Font Mono Med,11,-1,5,50,0,0,0,0,0,Regular"'';
+        general = ''"DejaVu Sans,11,-1,5,50,0,0,0,0,0,Regular"'';
       };
     };
     devlive.programs.ghostty.enable = true;
@@ -200,7 +198,7 @@ in
           enableUserTemplates = false;
         };
         ui = {
-          fontDefault = "FiraCode Nerd Font";
+          fontDefault = "DejaVu Sans";
           fontFixed = "FiraCode Nerd Font Mono";
           panelBackgroundOpacity = 1;
         };

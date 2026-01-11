@@ -6,6 +6,12 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
+    fonts = {
+      fontDir.enable = true;
+      packages = with pkgs; [
+        nerd-fonts.fira-code
+      ];
+    };
     programs.evolution.enable = true;
     programs.hyprland = {
       enable = true;
