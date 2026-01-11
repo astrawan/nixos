@@ -23,6 +23,28 @@ in
       termscp
       wayclip
     ];
+    home.file.".config/qt6ct/qt6ct.conf".text = lib.generators.toINI {} {
+      Appearance = {
+        color_scheme_path = "${config.xdg.configHome}/qt6ct/colors/noctalia.conf";
+        custom_palette = true;
+        icon_theme = "breeze-dark";
+      };
+      Fonts = {
+        fixed = ''"FiraCode Nerd Font Mono Med,12,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+        general = ''"FiraCode Nerd Font Med,12,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+      };
+    };
+    home.file.".config/qt5ct/qt5ct.conf".text = lib.generators.toINI {} {
+      Appearance = {
+        color_scheme_path = "${config.xdg.configHome}/qt5ct/colors/noctalia.conf";
+        custom_palette = true;
+        icon_theme = "breeze-dark";
+      };
+      Fonts = {
+        fixed = ''"FiraCode Nerd Font Mono Med,12,-1,5,57,0,0,0,0,0,Regular"'';
+        general = ''"FiraCode Nerd Font Med,12,-1,5,57,0,0,0,0,0,Regular"'';
+      };
+    };
     devlive.programs.ghostty.enable = true;
     programs.ghostty.settings = {
       background-opacity = 0.8;
