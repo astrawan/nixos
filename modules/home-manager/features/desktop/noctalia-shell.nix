@@ -250,7 +250,12 @@ in
       };
     };
     # Document viewer
-    programs.zathura.enable = true;
+    programs.zathura = {
+      enable = true;
+      options = {
+        selection-clipboard = "clipboard";
+      };
+    };
     # Enable zen browser transparency and custom layout
     programs.zen-browser.profiles.default.settings = lib.mkIf config.devlive.programs.zen-browser.enable {
       "browser.tabs.inTitlebar" = 0;
