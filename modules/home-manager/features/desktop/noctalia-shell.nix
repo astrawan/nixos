@@ -53,15 +53,7 @@ in
     # System monitor
     programs.bottom.enable = true;
     # Image preview
-    programs.feh = {
-      enable = true;
-      keybindings = {
-        next_img = "Right";
-        prev_img = "Left";
-        zoom_in = "plus";
-        zoom_out = "minus";
-      };
-    };
+    programs.imv.enable = true;
     # Media player
     programs.mpv.enable = true;
     programs.quickshell.enable = true;
@@ -214,7 +206,7 @@ in
         opener = {
           image = [
             {
-              run = ''feh "$@"'';
+              run = ''imv "$@"'';
               orphan = true;
             }
           ];
@@ -390,7 +382,7 @@ in
         windowrule = [
           # Brave browser dialog
           "float,content photo,size 800 600,class:brave"
-          "float,content photo,size 800 600,class:feh"
+          "float,content photo,size 800 600,class:imv"
           "float,content video,size 800 600,class:mpv"
           "float,size 800 600,class:org.pwmt.zathura"
           "float,size 800 600,class:nm-connection-editor"
@@ -475,24 +467,24 @@ in
     xdg.mimeApps.defaultApplications = {
       "application/pdf" = "org.pwmt.zathura.desktop";
 
-      "image/bmp" = "feh.desktop";
-      "image/gif" = "feh.desktop";
-      "image/jpeg" = "feh.desktop";
-      "image/jpg" = "feh.desktop";
-      "image/pjpeg" = "feh.desktop";
-      "image/png" = "feh.desktop";
-      "image/tiff" = "feh.desktop";
-      "image/webp" = "feh.desktop";
-      "image/x-bmp" = "feh.desktop";
-      "image/x-pcx" = "feh.desktop";
-      "image/x-png" = "feh.desktop";
-      "image/x-portable-anymap" = "feh.desktop";
-      "image/x-portable-bitmap" = "feh.desktop";
-      "image/x-portable-graymap" = "feh.desktop";
-      "image/x-portable-pixmap" = "feh.desktop";
-      "image/x-tga" = "feh.desktop";
-      "image/x-xbitmap" = "feh.desktop";
-      "image/heic" = "feh.desktop";
+      "image/bmp" = "imv.desktop";
+      "image/gif" = "imv.desktop";
+      "image/jpeg" = "imv.desktop";
+      "image/jpg" = "imv.desktop";
+      "image/pjpeg" = "imv.desktop";
+      "image/png" = "imv.desktop";
+      "image/tiff" = "imv.desktop";
+      "image/webp" = "imv.desktop";
+      "image/x-bmp" = "imv.desktop";
+      "image/x-pcx" = "imv.desktop";
+      "image/x-png" = "imv.desktop";
+      "image/x-portable-anymap" = "imv.desktop";
+      "image/x-portable-bitmap" = "imv.desktop";
+      "image/x-portable-graymap" = "imv.desktop";
+      "image/x-portable-pixmap" = "imv.desktop";
+      "image/x-tga" = "imv.desktop";
+      "image/x-xbitmap" = "imv.desktop";
+      "image/heic" = "imv.desktop";
     };
   };
 }
