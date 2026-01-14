@@ -202,6 +202,18 @@ in
     # File manager
     programs.yazi = {
       enable = true;
+      keymap = {
+        mgr.prepend_keymap = [
+          {
+            run = "plugin chmod";
+            on = [ ">" "c" ];
+            desc = "Chmod on selected files";
+          }
+        ];
+      };
+      plugins = {
+        chmod = pkgs.yaziPlugins.chmod;
+      };
       settings = {
         opener = {
           image = [
