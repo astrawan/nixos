@@ -52,6 +52,11 @@ in
     };
     # System monitor
     programs.bottom.enable = true;
+    programs.eza = {
+      colors = "always";
+      enable = true;
+      icons = "always";
+    };
     # Image preview
     programs.imv.enable = true;
     # Media player
