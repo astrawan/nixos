@@ -2,6 +2,9 @@
 
 let
   cfg = config.devlive.features.desktop.noctalia-shell;
+  yaziPlugins = {
+    gvfs = (pkgs.callPackage ../../../../pkgs/yazi/plugins/gvfs.nix {});
+  };
 in
 {
   config = lib.mkIf cfg.enable {
@@ -20,7 +23,6 @@ in
       networkmanagerapplet
       qbittorrent
       telegram-desktop
-      termscp
       wayclip
     ];
     home.file.".config/qt6ct/qt6ct.conf".text = lib.generators.toINI {} {
@@ -207,17 +209,118 @@ in
     # File manager
     programs.yazi = {
       enable = true;
+      extraPackages = with pkgs; [
+        # recycle-bin
+        trash-cli
+      ];
+      initLua = ''
+        require("full-border"):setup({
+          type = ui.Border.ROUNDED,
+        })
+        require("gvfs"):setup({})
+        require("recycle-bin"):setup({})
+      '';
       keymap = {
         mgr.prepend_keymap = [
+          {
+            run = ''shell "$SHELL" --block'';
+            on = [ "!" ];
+            desc = "Open $SHELL here";
+          }
           {
             run = "plugin chmod";
             on = [ ">" "c" ];
             desc = "Chmod on selected files";
           }
+          {
+            run = "plugin mount";
+            on = [ ">" "m" ];
+            desc = "Mount/unmount disk";
+          }
+          {
+            run = "plugin recycle-bin";
+            on = [ ">" "r" ];
+            desc = "Open Recycle Bin menu";
+          }
+          {
+            run = "plugin gvfs -- add-mount";
+            on = [ "<C-g>" "a" ];
+            desc = "Add a GVFS mount URI";
+          }
+          {
+            run = "plugin gvfs -- jump-back-prev-cwd";
+            on = [ "<C-g>" "b" ];
+            desc = "Jump back to position before jumped to device";
+          }
+          {
+            run = "plugin gvfs -- automount-when-cd";
+            on = [ "<C-g>" "c" ];
+            desc = "Enable automount when cd to device under cwd";
+          }
+          {
+            run = "plugin gvfs -- automount-when-cd --disabled";
+            on = [ "<C-g>" "C" ];
+            desc = "Disable automount when cd to device under cwd";
+          }
+          {
+            run = "plugin gvfs -- edit-mount";
+            on = [ "<C-g>" "e" ];
+            desc = "Edit a GVFS mount URI";
+          }
+          {
+            run = "plugin gvfs -- jump-to-device";
+            on = [ "<C-g>" "j" ];
+            desc = "Select device then jump to its mount point";
+          }
+          {
+            run = "plugin gvfs -- jump-to-device --automount";
+            on = [ "<C-g>" "J" ];
+            desc = "Automount than select device to jump to its mount point";
+          }
+          {
+            run = "plugin gvfs -- select-then-mount";
+            on = [ "<C-g>M" "m" ];
+            desc = "Select device then mount";
+          }
+          {
+            run = "plugin gvfs -- select-then-mount --jump";
+            on = [ "<C-g>" "M" ];
+            desc = "Select device to mount and jump to its mount point";
+          }
+          {
+            run = "plugin gvfs -- remove-mount";
+            on = [ "<C-g>" "r" ];
+            desc = "Remove a GVFS mount URI";
+          }
+          {
+            run = "plugin gvfs -- remount-current-cwd-device";
+            on = [ "<C-g>" "R" ];
+            desc = "Remount device under cwd";
+          }
+          {
+            run = "plugin gvfs -- select-then-unmount --eject";
+            on = [ "<C-g>" "u" ];
+            desc = "Select device than unmount";
+          }
+          {
+            run = "plugin gvfs -- select-then-unmount --eject --force";
+            on = [ "<C-g>" "U" ];
+            desc = "Select device than force to unmount";
+          }
+          {
+            run = "plugin toggle-pane max-preview";
+            on = [ "P" ];
+            desc = "How or hide the preview pane";
+          }
         ];
       };
       plugins = {
         chmod = pkgs.yaziPlugins.chmod;
+        full-border = pkgs.yaziPlugins.full-border;
+        gvfs = yaziPlugins.gvfs;
+        mount = pkgs.yaziPlugins.mount;
+        recycle-bin = pkgs.yaziPlugins.recycle-bin;
+        toggle-pane = pkgs.yaziPlugins.toggle-pane;
       };
       settings = {
         opener = {
@@ -255,6 +358,13 @@ in
               use = "image";
             }
           ];
+        };
+        mgr.ratio = [3 5 0];
+      };
+      theme = {
+        flavor = {
+          dark = "noctalia";
+          light = "noctalia";
         };
       };
     };

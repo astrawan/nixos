@@ -48,6 +48,7 @@ in
       theme = "noctalia";
       wayland.enable = true;
     };
+    services.gvfs.enable = true;
     services.power-profiles-daemon.enable = true;
 
     # enable usb auto-mount
