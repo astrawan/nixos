@@ -1,8 +1,45 @@
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  desktop = config.devlive.features.desktop;
+in
 {
-  devlive.features.desktop.gnome.enable = false;
-  devlive.features.desktop.noctalia-shell.enable = true;
+  devlive.features.desktop = {
+    type = "noctalia";
+    extraHomePackages = with pkgs; [
+        aegisub
+        freerdp
+        gimp
+        gradia
+        inkscape
+        libreoffice
+        nerd-fonts.fira-code
+        popcorntime
+        telegram-desktop
+        wireshark
+    ];
+    gnome.extraHomePackages = lib.mkIf (desktop.type == "gnome") (with pkgs; [
+        dconf-editor
+        foliate
+        fragments
+        gnome-extension-manager
+        gnome-tweaks
+        lock
+    ]);
+    noctalia = lib.mkIf (desktop.type == "noctalia") {
+      compositor = "hyprland";
+      extraHomePackages = (
+        if desktop.noctalia.compositor == "hyprland"
+        then
+          (with pkgs; [
+            qbittorrent
+          ])
+        else (with pkgs; [
+            fragments
+          ])
+      );
+    };
+  };
   devlive.features.devel-android.enable = true;
   devlive.features.yubikey.enable = true;
 

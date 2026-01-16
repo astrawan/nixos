@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.gnome;
+  desktop = config.devlive.features.desktop;
 in 
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (desktop.type == "gnome") {
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
     services.displayManager.autoLogin = {
@@ -31,7 +31,7 @@ in
       nixos-artwork.wallpapers.simple-blue
       ghostty
       showtime
-    ];
+    ] ++desktop.gnome.extraPackages;
     programs.evolution.enable = true;
 
     # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229

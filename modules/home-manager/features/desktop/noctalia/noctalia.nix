@@ -1,30 +1,25 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.noctalia-shell;
+  desktop = config.devlive.features.desktop;
   yaziPlugins = {
-    gvfs = (pkgs.callPackage ../../../../pkgs/yazi/plugins/gvfs.nix {});
+    gvfs = (pkgs.callPackage ../../../../../pkgs/yazi/plugins/gvfs.nix {});
   };
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (desktop.type == "noctalia") {
     home.packages = with pkgs; [
       adw-gtk3
       adwaita-icon-theme
       bazaar
-      freerdp
-      gimp
-      # noctalia-shell gtk4 color schema integration
+      # noctalia gtk4 color schema integration
       glib
       kdePackages.breeze-icons
       kdePackages.qt6ct
-      inkscape
       libsForQt5.qt5ct
       networkmanagerapplet
-      qbittorrent
-      telegram-desktop
       wayclip
-    ];
+    ] ++desktop.extraHomePackages ++desktop.noctalia.extraHomePackages;
     home.file.".config/qt6ct/qt6ct.conf".text = lib.generators.toINI {} {
       Appearance = {
         color_scheme_path = "${config.xdg.configHome}/qt6ct/colors/noctalia.conf";
@@ -49,7 +44,8 @@ in
     };
     devlive.programs.ghostty.enable = true;
     programs.ghostty.settings = {
-      background-opacity = 0.8;
+      # niri doesn't support window blur
+      background-opacity = if (desktop.noctalia.compositor == "hyprland") then 0.8 else 1.0;
       theme = "noctalia";
     };
     # System monitor
@@ -156,7 +152,7 @@ in
         };
         colorSchemes.predefinedScheme = "Noctalia (default)";
         general = {
-          allowPanelsOnScreenWithoutBar = false;
+          allowPanelsOnScreenWithoutBar = true;
           compactLockScreen = true;
           enableShadows = false;
           showScreenCorners = true;
@@ -191,8 +187,8 @@ in
           cava = false;
           yazi = true;
           emacs = false;
-          niri = false;
-          hyprland = true;
+          niri = if (desktop.noctalia.compositor == "niri") then true else false;
+          hyprland = if (desktop.noctalia.compositor == "hyprland") then true else false;
           mango = false;
           zed = false;
           helix = false;
@@ -324,40 +320,94 @@ in
       };
       settings = {
         opener = {
-          image = [
+          imv = lib.mkIf(config.programs.imv.enable) ([
             {
               run = ''imv "$@"'';
               orphan = true;
             }
-          ];
-          pdf = [
+          ]);
+          zathura = lib.mkIf(config.programs.zathura.enable) ([
             {
               run = ''zathura "$@"'';
               orphan = true;
             }
-          ];
-          play = [
+          ]);
+          mpv = lib.mkIf(config.programs.mpv.enable) ([
             {
               run = ''mpv "$@"'';
               orphan = true;
             }
-          ];
+          ]);
         };
         open = {
-          rules = [
-            {
-              mime = "application/pdf";
-              use = "pdf";
-            }
-            {
-              mime = "video/*";
-              use = "play";
-            }
-            {
-              mime = "image/*";
-              use = "image";
-            }
-          ];
+          rules = (if (config.programs.zathura.enable) then
+            [
+              {
+                mime = "application/pdf";
+                use = "zathura";
+              }
+              {
+                mime = "application/postscript";
+                use = "zathura";
+              }
+              {
+                mime = "image/djvu";
+                use = "zathura";
+              }
+            ]
+          else [])
+          ++(if (config.programs.imv.enable) then
+            [
+              {
+                mime = "image/bmp";
+                use = "imv";
+              }
+              {
+                mime = "image/gif";
+                use = "imv";
+              }
+              {
+                mime = "image/jpeg";
+                use = "imv";
+              }
+              {
+                mime = "image/jpg";
+                use = "imv";
+              }
+              {
+                mime = "image/pjpeg";
+                use = "imv";
+              }
+              {
+                mime = "image/png";
+                use = "imv";
+              }
+              {
+                mime = "image/tiff";
+                use = "imv";
+              }
+              {
+                mime = "image/webp";
+                use = "imv";
+              }
+              {
+                mime = "image/x-*";
+                use = "imv";
+              }
+              {
+                mime = "image/heic";
+                use = "imv";
+              }
+            ]
+          else [])
+          ++(if (config.programs.mpv.enable) then
+            [
+              {
+                mime = "video/*";
+                use = "mpv";
+              }
+            ]
+          else []);
         };
         mgr.ratio = [3 5 0];
       };
@@ -377,159 +427,65 @@ in
     };
     # Enable zen browser transparency and custom layout
     programs.zen-browser.profiles.default.settings = lib.mkIf config.devlive.programs.zen-browser.enable {
-      "browser.tabs.inTitlebar" = 0;
+      "browser.tabs.inTitlebar" = if (desktop.noctalia.compositor == "hyprland") then 0 else 2;
       "zen.view.compact.hide-tabbar" = true;
       "zen.view.compact.hide-toolbar" = false;
       "zen.view.grey-out-inactive-windows" = false;
-      "zen.widget.linux.transparency" = true;
+      "zen.widget.linux.transparency" = if (desktop.noctalia.compositor == "hyprland") then true else false;
     };
-    wayland.windowManager.hyprland = {
+    wayland.windowManager.hyprland = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
       enable = true;
       settings = {
-        "$fileManager" = "$terminal -e yazi";
-        "$mod" = "SUPER";
-        "$sysMonitor" = "$terminal -e btm";
-        "$terminal" = "ghostty";
-        "$webBrowser" = "brave";
-        "$webBrowserAlt" = "zen-beta";
-        source = "${config.xdg.configHome}/hypr/noctalia/noctalia-colors.conf";
-        bind = [
-          "$mod       , A                     , exec            , noctalia-shell ipc call launcher toggle"
-          "$mod       , B                     , exec            , noctalia-shell ipc call bar toggle"
-          "$mod SHIFT , B                     , exec            , noctalia-shell ipc call battery togglePanel"
-          "$mod       , C                     , killactive"
-          "$mod SHIFT , C                     , exec            , noctalia-shell ipc call controlCenter toggle"
-          "$mod SHIFT , D                     , exec            , noctalia-shell ipc call calendar toggle"
-          "$mod       , E                     , exec            , $fileManager"
-          "$mod       , F                     , fullscreen      , 1"
-          "$mod       , M                     , exec            , $sysMonitor"
-          "$mod SHIFT , N                     , exec            , noctalia-shell ipc call notifications toggleHistory"
-          "$mod       , Q                     , exec            , $terminal"
-          "$mod       , R                     , exec            , noctalia-shell ipc call launcher toggle"
-          "$mod SHIFT , S                     , exec            , noctalia-shell ipc call settings toggle"
-          "$mod       , V                     , togglefloating"
-
-          "$mod SHIFT , H                     , movewindow      , l"
-          "$mod SHIFT , L                     , movewindow      , r"
-          "$mod SHIFT , K                     , movewindow      , u"
-          "$mod SHIFT , J                     , movewindow      , d"
-          "$mod       , H                     , movefocus       , l"
-          "$mod       , L                     , movefocus       , r"
-          "$mod       , K                     , movefocus       , u"
-          "$mod       , J                     , movefocus       , d"
-
-          "$mod       , W                     , exec            , $webBrowser"
-          "$mod SHIFT , W                     , exec            , $webBrowserAlt"
-
-          # Switch workspaces with $mod + [0-9]
-          "$mod       , 1                     , workspace       , 1"
-          "$mod       , 2                     , workspace       , 2"
-          "$mod       , 3                     , workspace       , 3"
-          "$mod       , 4                     , workspace       , 4"
-          "$mod       , 5                     , workspace       , 5"
-          "$mod       , 6                     , workspace       , 6"
-          "$mod       , 7                     , workspace       , 7"
-          "$mod       , 8                     , workspace       , 8"
-          "$mod       , 9                     , workspace       , 9"
-          # Move active window to a workspace with $mod + SHIFT + [0-9]
-          "$mod SHIFT , 1                     , movetoworkspace , 1"
-          "$mod SHIFT , 2                     , movetoworkspace , 2"
-          "$mod SHIFT , 3                     , movetoworkspace , 3"
-          "$mod SHIFT , 4                     , movetoworkspace , 4"
-          "$mod SHIFT , 5                     , movetoworkspace , 5"
-          "$mod SHIFT , 6                     , movetoworkspace , 6"
-          "$mod SHIFT , 7                     , movetoworkspace , 7"
-          "$mod SHIFT , 8                     , movetoworkspace , 8"
-          "$mod SHIFT , 9                     , movetoworkspace , 9"
-
-          # Move active monitor focus with $mod + ('[' or ']')
-          "$mod       , BRACKETLEFT           , focusmonitor    , -1"
-          "$mod       , BRACKETRIGHT          , focusmonitor    , +1"
-
-          "CTRL ALT   , DELETE                , exec            , noctalia-shell ipc call sessionMenu toggle"
-          "CTRL ALT   , L                     , exec            , noctalia-shell ipc call lockScreen lock"
-          "           , PRINT                 , exec            , flameshot gui"
-        ];
-        bindm = [
-          # Move/resize windows with $mod + LMB/RMB and dragging
-          "$mod       , mouse:272             , movewindow"
-          "$mod SHIFT , mouse:273             , resizewindow"
-        ];
-        bindel = [
-          # Laptop multimedia keys for volume and LCD brightness
-          "           , XF86AudioRaiseVolume  , exec            , noctalia-shell ipc call volume increase"
-          "           , XF86AudioLowerVolume  , exec            , noctalia-shell ipc call volume decrease"
-          "           , XF86AudioMute         , exec            , noctalia-shell ipc call volume muteOutput"
-          "           , XF86AudioMicMute      , exec            , noctalia-shell ipc call volume muteInput"
-          "           , XF86MonBrightnessUp   , exec            , noctalia-shell ipc call brightness increase"
-          "           , XF86MonBrightnessDown , exec            , noctalia-shell ipc call brightness decrease"
-        ];
-        bindl = [
-          "           , XF86AudioNext         , exec            , noctalia-shell ipc call media next"
-          "           , XF86AudioPause        , exec            , noctalia-shell ipc call media pause"
-          "           , XF86AudioPlay         , exec            , noctalia-shell ipc call media play"
-          "           , XF86AudioPrev         , exec            , noctalia-shell ipc call media previous"
-        ];
-        binds = {
-          # Enable move window focus on fullscreen mode
-          movefocus_cycles_fullscreen = true;
-        };
-        decoration = {
-          rounding = 14;
-          active_opacity = 1.0;
-          inactive_opacity = 1.0;
-          shadow = {
-            enabled = true;
-            range = 4;
-            render_power = 3;
-            color = "rgba(1a1a1aee)";
-          };
-          blur = {
-            enabled = true;
-            size = 7;
-            passes = 3;
-            ignore_opacity = true;
-            noise = 0.08;
-            contrast = 1.5;
-            xray = false;
-            new_optimizations = true;
-          };
-        };
-        general = {
-          allow_tearing = false;
-          border_size = 4;
-          layout = "dwindle";
-          resize_on_border = true;
-        };
-        layerrule = [
-          "blur,com.mitchellh.ghostty"
-          "blur,zen-beta"
-        ];
-        monitor = ",preferred,auto,1";
-        windowrule = [
-          # Brave browser dialog
-          "float,content photo,size 800 600,class:brave"
-          "float,content photo,size 800 600,class:imv"
-          "float,content video,size 800 600,class:mpv"
-          "float,size 800 600,class:org.pwmt.zathura"
-          "float,size 800 600,class:nm-connection-editor"
-          "float,size 800 600,class:nm-openconnect-auth-dialog"
-        ];
-        workspace = [
-          "1,persistent:true"
-          "2,persistent:true"
-          "3,persistent:true"
-          "4,persistent:true"
-          "5,persistent:true"
-          "6,persistent:true"
-          "7,persistent:true"
-          "8,persistent:true"
-          "9,persistent:true"
+        source = [
+          "${config.xdg.configHome}/hypr/autostart.conf"
+          "${config.xdg.configHome}/hypr/binds.conf"
+          "${config.xdg.configHome}/hypr/common.conf"
+          "${config.xdg.configHome}/hypr/env.conf"
+          "${config.xdg.configHome}/hypr/input.conf"
+          "${config.xdg.configHome}/hypr/laf.conf"
+          "${config.xdg.configHome}/hypr/permissions.conf"
+          "${config.xdg.configHome}/hypr/rules.conf"
+          "${config.xdg.configHome}/hypr/noctalia/noctalia-colors.conf"
         ];
       };
     };
 
-    services.flameshot = {
+    xdg.configFile."hypr/autostart.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/autostart.conf;
+    };
+    xdg.configFile."hypr/binds.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/binds.conf;
+    };
+    xdg.configFile."hypr/common.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/common.conf;
+    };
+    xdg.configFile."hypr/env.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/env.conf;
+    };
+    xdg.configFile."hypr/input.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/input.conf;
+    };
+    xdg.configFile."hypr/laf.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/laf.conf;
+    };
+    xdg.configFile."hypr/permissions.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/permissions.conf;
+    };
+    xdg.configFile."hypr/rules.conf" = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
+      source = ./config/hypr/rules.conf;
+    };
+
+    xdg.configFile."niri/config.kdl" = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      source = ./config/niri/config.kdl;
+    };
+    xdg.configFile."niri/binds.kdl" = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      source = ./config/niri/binds.kdl;
+    };
+    xdg.configFile."niri/output.kdl" = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      source = ./config/niri/output.kdl;
+    };
+
+    services.flameshot = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
       enable = true;
       settings = {
         General = {
@@ -538,7 +494,7 @@ in
         };
       };
     };
-    services.hypridle = {
+    services.hypridle = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
       enable = true;
       settings = {
         general = {
@@ -562,6 +518,20 @@ in
         ];
       };
     };
+    services.swayidle = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      enable = true;
+      timeouts = [
+        {
+          timeout = 300;
+          command = "${(lib.getExe config.programs.noctalia-shell.package)} ipc call lockScreen lock";
+        }
+        {
+          timeout = 900;
+          command = "${(lib.getExe pkgs.niri)} msg action power-off-monitors";
+          resumeCommand = "${(lib.getExe pkgs.niri)} msg power-on-monitors";
+        }
+      ];
+    };
     services.tailscale-systray.enable = true;
     services.udiskie = {
       enable = true;
@@ -570,6 +540,7 @@ in
           file_manager = "ghostty -e yazi";
         };
       };
+      tray = "always";
     };
 
     dconf.settings."org/gnome/desktop/interface".gtk-theme = "adw-gtk3";
@@ -593,6 +564,8 @@ in
 
     xdg.mimeApps.defaultApplications = {
       "application/pdf" = "org.pwmt.zathura.desktop";
+      "application/postscript" = "org.pwmt.zathura.desktop";
+      "image/vnd.djvu" = "org.pwmt.zathura.desktop";
 
       "image/bmp" = "imv.desktop";
       "image/gif" = "imv.desktop";

@@ -10,7 +10,7 @@
     ./tiling-shell.nix
   ];
 
-  config = lib.mkIf config.devlive.features.desktop.gnome.enable {
+  config = lib.mkIf (config.devlive.features.desktop.type == "gnome") {
     dconf.settings."org/gnome/shell" = {
       enabled-extensions = with pkgs.gnomeExtensions; [
         appindicator.extensionUuid

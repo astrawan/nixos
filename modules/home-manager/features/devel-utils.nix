@@ -11,7 +11,7 @@ in
       tree-sitter
     ]
     ++ (
-      if config.devlive.features.desktop.gnome.enable then
+      if config.devlive.features.desktop.type == "gnome" then
         with pkgs; [cartero dbeaver-bin gaphor]
       else
         []

@@ -1,24 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.gnome;
+  desktop = config.devlive.features.desktop;
 in 
 {
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      dconf-editor
-      foliate
-      fragments
-      gimp
-      gnome-extension-manager
-      gnome-tweaks
-      inkscape
-      lock
-      nerd-fonts.fira-code
-      remmina
-      telegram-desktop
-      zoom-us
-    ];
+  config = lib.mkIf (desktop.type == "gnome") {
+    home.packages = desktop.extraHomePackages ++desktop.gnome.extraHomePackages;
 
     xdg.mimeApps.defaultApplications = {
       "x-scheme-handler/tg" = "org.telegram.desktop.desktop";

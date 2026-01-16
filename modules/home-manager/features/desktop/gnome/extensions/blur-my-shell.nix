@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.gnome;
+  desktop = config.devlive.features.desktop;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (desktop.type == "gnome") {
     home.packages = with pkgs; [
       gnomeExtensions.blur-my-shell
     ];

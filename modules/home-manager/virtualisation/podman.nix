@@ -11,7 +11,7 @@ in
       podman-compose
     ]
     ++ (
-      if config.devlive.features.desktop.gnome.enable then
+      if config.devlive.features.desktop.type == "gnome" then
         with pkgs; [
           boxbuddy
           pods

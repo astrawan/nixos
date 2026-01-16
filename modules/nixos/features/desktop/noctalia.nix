@@ -1,11 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.noctalia-shell;
+  desktop = config.devlive.features.desktop;
   sddm-noctalia = (pkgs.callPackage ../../../../pkgs/sddm-noctalia.nix {});
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (desktop.type == "noctalia") {
+    environment.systemPackages = desktop.extraPackages ++desktop.noctalia.extraPackages;
     environment.variables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
@@ -18,9 +19,12 @@ in
       ];
     };
     programs.evolution.enable = true;
-    programs.hyprland = {
+    programs.hyprland = lib.mkIf (desktop.noctalia.compositor == "hyprland") {
       enable = true;
       xwayland.enable = true;
+    };
+    programs.niri = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      enable = true;
     };
     hardware.bluetooth.enable = true;
     services.displayManager.autoLogin = {
@@ -35,10 +39,10 @@ in
       package = pkgs.kdePackages.sddm;
       settings = {
         Autologin = {
-          Session = "hyprland.desktop";
+          Session = "${desktop.noctalia.compositor}.desktop";
         };
         General = {
-          DefaultSession = "hyprland.desktop";
+          DefaultSession = "${desktop.noctalia.compositor}.desktop";
           DisplayServer = "wayland";
         };
         Theme = {
@@ -47,6 +51,12 @@ in
       };
       theme = "noctalia";
       wayland.enable = true;
+    };
+    security.polkit = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      enable = true;
+    };
+    services.gnome.gnome-keyring = lib.mkIf (desktop.noctalia.compositor == "niri") {
+      enable = true;
     };
     services.gvfs.enable = true;
     services.power-profiles-daemon.enable = true;

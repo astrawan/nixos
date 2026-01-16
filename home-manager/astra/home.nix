@@ -1,5 +1,5 @@
 # vi: sw=2 ts=2 et
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Allow unfree packages
@@ -18,29 +18,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = (
-    if config.devlive.features.desktop.gnome.enable then
-      with pkgs; [
-        aegisub
-        gradia
-        libreoffice
-        popcorntime
-        wireshark
-        wl-clipboard
-      ]
-    else if config.devlive.features.desktop.noctalia-shell.enable then
-      with pkgs; [
-        aegisub
-        libreoffice
-        popcorntime
-        wireshark
-      ]
-    else
-      []
-  );
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

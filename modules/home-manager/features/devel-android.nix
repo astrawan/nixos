@@ -6,7 +6,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.packages = (
-      if config.devlive.features.desktop.gnome.enable then
+      if config.devlive.features.desktop.type == "gnome" then
         with pkgs; [genymotion]
       else
         []

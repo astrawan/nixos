@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.devlive.features.desktop.gnome;
+  desktop = config.devlive.features.desktop;
 in
 {
-  config = lib.mkIf cfg.enable (lib.mkMerge [
+  config = lib.mkIf (desktop.type == "gnome") (lib.mkMerge [
     (lib.mkIf config.devlive.services.tailscale.enable {
       home.packages = with pkgs; [
         gnomeExtensions.tailscale-qs
